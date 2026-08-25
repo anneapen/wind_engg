@@ -5,7 +5,8 @@ import numpy as np
 
 def power_law_wind_speed(z:float,z_ref:float,V_ref:float,terrain:str)->float:
     """
-    Returns the wind speed based on power law
+    Returns the wind speed (Vz,m/s) for the given height (z,m),reference height(z_ref,m), 
+    refernce speed (V_ref,m/s) & terrain conditions based on power law
     """
     if z <= 0:
         raise ValueError("Height z must be greater than zero.")
@@ -26,6 +27,8 @@ def power_law_wind_speed(z:float,z_ref:float,V_ref:float,terrain:str)->float:
 
 def power_law_wind_speed_profile(z_ref:float,V_ref:float,terrain:str):
     """
+    Plots the wind speed for the given reference height(z_ref), refernce speed (V_ref) & terrain conditions
+    based on power law
     """
 
     if V_ref <= 0:
