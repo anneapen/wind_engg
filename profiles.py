@@ -1,3 +1,7 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+
 
 def power_law_wind_speed(z:float,z_ref:float,V_ref:float,terrain:str)->float:
     """
@@ -19,3 +23,39 @@ def power_law_wind_speed(z:float,z_ref:float,V_ref:float,terrain:str)->float:
     
     Vz=V_ref*((z/z_ref)**alpha[terrain])
     return round(Vz,2)
+
+def power_law_wind_speed_profile(z_ref:float,V_ref:float,terrain:str):
+    """
+    """
+
+    if V_ref <= 0:
+        raise ValueError("Reference wind speed V_ref must be greater than zero.")
+
+    if z_ref <= 0:
+        raise ValueError("Reference height z_ref must be greater than zero.")
+
+    if terrain!=("open" or "suburban" or "urban"):
+        raise ValueError("Terrain should be open/suburban/urban .")
+        
+    alpha={"open":0.14,"suburban":0.22,"urban":0.33}
+
+    #Heights
+    z = np.linspace(1, 200, 200)
+    #Calculating wind speeds    
+    Vz=V_ref*((z/z_ref)**alpha[terrain])
+
+    #Plot
+    plt.figure(figsize=(6, 8))
+
+    plt.plot(Vz, z)
+    
+    plt.xlabel("Wind Speed (m/s)")
+    plt.ylabel("Height (m)")
+    plt.title("Power Law Wind Profile")
+    
+    plt.xlim(0, 50)
+    plt.ylim(0, 200)
+    
+    plt.grid()
+    plt.show()
+
