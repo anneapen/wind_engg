@@ -14,3 +14,23 @@ def turbulence_std_dev(ti:float,mean_Vz:float)->float:
     std_dev=ti*mean_Vz
     return round(std_dev)
 
+def wind_fluctuation(wind_speed):
+    """
+    Calculates mean wind speed, turbulent fluctuations and turbulent intensity
+    from measured wind-speed data.
+    """
+
+    wind_speed = np.asarray(wind_speed, dtype=float)
+
+    mean_wind_speed = np.mean(wind_speed)
+
+    fluctuations = wind_speed - mean_wind_speed
+
+    std_dev=np.std(fluctuations)
+
+    TI=turbulence_intensity(mean_wind_speed,std_dev)
+
+    print("Mean wind speed:", mean_wind_speed)
+    print("Fluctuations:", fluctuations)
+    print("Standard deviation:",round(std_dev,2))
+    print("Turbulence Intensity:",TI)
