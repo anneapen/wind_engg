@@ -126,7 +126,7 @@ def logarithmic_law_wind_speed_profile(z_ref:float,V_ref:float,terrain:str):
     
     plt.xlabel("Wind Speed (m/s)")
     plt.ylabel("Height (m)")
-    plt.title("Power Law Wind Profile")
+    plt.title("Logarithmic Law Wind Profile")
     
     plt.xlim(0, 50)
     plt.ylim(0, 200)
