@@ -77,3 +77,21 @@ def friction_velocity(z_ref:float,V_ref:float,terrain:str)->float:
     k=0.4
     V_friction=k*V_ref/np.log(z_ref/z0[terrain])
     return round(V_friction,2)
+
+
+def logarithmic_law_wind_speed(z:float,z_ref:float,V_ref:float,terrain:str)->float:
+    """
+    Returns the wind speed using logarithmic law for the given height,reference height, velocity and terrain conditions
+    """
+
+    if z <= 0:
+        raise ValueError("Height z must be greater than zero.")
+    if terrain not in ("open", "suburban", "urban"):
+        raise ValueError("Terrain should be open/suburban/urban .")
+    
+    z0={"open":0.03,"suburban":0.3,"urban":1}
+    V_friction=friction_velocity(z_ref,V_ref,terrain)
+    k=0.4
+    
+    Vz=(V_friction/k)*np.log(z/z0[terrain])
+    return round(Vz,2)
