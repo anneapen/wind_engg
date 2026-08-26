@@ -9,3 +9,7 @@ def test_power_law_wind_speed():
 def test_friction_velocity():
     V_friction=profiles.friction_velocity(10,20,'suburban')
     assert V_friction==2.28
+
+def test_logarithmic_law_wind_speed():
+    Vz=profiles.logarithmic_law_wind_speed(50,10,20,"suburban")
+    assert Vz==29.16
