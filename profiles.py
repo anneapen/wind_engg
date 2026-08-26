@@ -62,3 +62,18 @@ def power_law_wind_speed_profile(z_ref:float,V_ref:float,terrain:str):
     plt.grid()
     plt.show()
 
+def friction_velocity(z_ref:float,V_ref:float,terrain:str)->float:
+    """
+    Returns the friction velocity for the given reference height, velocity and terrain conditions
+    """
+    k=0.4
+    if V_ref <= 0:
+        raise ValueError("Reference wind speed V_ref must be greater than zero.")
+
+    if z_ref <= 0:
+        raise ValueError("Reference height z_ref must be greater than zero.")
+    
+    z0={"open":0.03,"suburban":0.3,"urban":1}
+    k=0.4
+    V_friction=k*V_ref/np.log(z_ref/z0[terrain])
+    return round(V_friction,2)
