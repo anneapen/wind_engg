@@ -98,6 +98,7 @@ def integral_time_scale(fluctuations, sampling_freq: float):
 
 def integral_length_scale(mean_wind_speed,time_scale):
     """
+    Returns the integral length scale
     """
     if mean_wind_speed <= 0:
         raise ValueError(
