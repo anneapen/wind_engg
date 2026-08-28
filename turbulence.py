@@ -95,3 +95,20 @@ def integral_time_scale(fluctuations, sampling_freq: float):
         Tu += 0.5 * R1 * (t_zero - t1)
 
     return round(Tu,2)
+
+def integral_length_scale(mean_wind_speed,time_scale):
+    """
+    """
+    if mean_wind_speed <= 0:
+        raise ValueError(
+            "Mean wind speed must be greater than zero."
+        )
+
+    if time_scale <= 0:
+        raise ValueError(
+            "Time scale must be greater than zero."
+        )
+
+    L_u = mean_wind_speed * time_scale
+
+    return L_u

@@ -25,3 +25,7 @@ def test_auto_correlation():
 def test_integral_time_scale():
     Tu=turbulence.integral_time_scale([2, 1, -1, -2, -1, 1],1)
     assert Tu==0.74
+
+def test_integral_length_scale():
+    Lu=turbulence.integral_length_scale(15,0.74)
+    assert Lu==11.1
