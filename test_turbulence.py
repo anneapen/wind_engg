@@ -21,3 +21,7 @@ def test_wind_fluctuation():
 def test_auto_correlation():
     correlation=turbulence.auto_correlation([1, 2, 1])
     assert np.allclose(correlation,[1.  , 0.67, 0.17])
+
+def test_integral_time_scale():
+    Tu=turbulence.integral_time_scale([2, 1, -1, -2, -1, 1],1)
+    assert Tu==0.74

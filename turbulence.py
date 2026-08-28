@@ -44,5 +44,54 @@ def auto_correlation(fluctuations):
     #Normalilizing the correlation 
     #At zero lag, the wind signal is being compared with itself without any shift, so it should represent perfect correlation.
     correlation=correlation/correlation[0]
-    
+
     return np.round(correlation,2)
+
+def integral_time_scale(fluctuations, sampling_freq: float):
+    """
+    Calculate integral turbulence time scale.
+    """
+
+    if sampling_freq <= 0:
+        raise ValueError("Sampling frequency must be greater than zero.")
+
+    dt = 1 / sampling_freq
+
+    R = auto_correlation(fluctuations)
+
+    zero_crossing = np.where(R <= 0)[0]
+
+    if len(zero_crossing) == 0:
+        raise ValueError("Autocorrelation does not cross zero.")
+
+    first_zero = zero_crossing[0]
+
+    # Exact zero crossing
+    if R[first_zero] == 0:
+
+        Tu = np.trapezoid(
+            R[:first_zero + 1],
+            dx=dt
+        )
+
+    else:
+
+        R1 = R[first_zero - 1]
+        R2 = R[first_zero]
+
+        t1 = (first_zero - 1) * dt
+        t2 = first_zero * dt
+
+        # Interpolated zero-crossing time
+        t_zero = t1 - R1 * (t2 - t1) / (R2 - R1)
+
+        # Area up to last positive autocorrelation value
+        Tu = np.trapz(
+            R[:first_zero],
+            dx=dt
+        )
+
+        # Add final triangular area
+        Tu += 0.5 * R1 * (t_zero - t1)
+
+    return round(Tu,2)
