@@ -17,3 +17,7 @@ def test_wind_fluctuation():
     assert std_dev==0.44
     # assert TI==0.04
     assert TI == pytest.approx(0.04)
+
+def test_auto_correlation():
+    correlation=turbulence.auto_correlation([1, 2, 1])
+    assert np.allclose(correlation,[1.  , 0.67, 0.17])

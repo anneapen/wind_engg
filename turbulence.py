@@ -32,4 +32,17 @@ def wind_fluctuation(wind_speed):
 
     return mean_wind_speed,fluctuations,round(std_dev,2),TI
 
+def auto_correlation(fluctuations):
+    """
+    """
+    #Correlating the fluctuations with both negative and positive shifts
+    correlation=np.correlate(fluctuations,fluctuations,"full")
+
+    #Considering only positive shifts because we're interested in how does correlation decay as we move forward in time
+    correlation=correlation[correlation.size//2:]
+
+    #Normalilizing the correlation 
+    #At zero lag, the wind signal is being compared with itself without any shift, so it should represent perfect correlation.
+    correlation=correlation/correlation[0]
     
+    return np.round(correlation,2)
