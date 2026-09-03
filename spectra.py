@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def spectrum(frequency,
+def kaimal_spectrum(frequency,
     mean_wind_speed,
     std_dev,
     length_scale
@@ -11,8 +11,6 @@ def spectrum(frequency,
     using a Kaimal-type formulation.
     """
 
-    frequency = np.asarray(frequency, dtype=float)
-
     n = frequency * length_scale / mean_wind_speed
 
     Su = (
@@ -21,4 +19,4 @@ def spectrum(frequency,
         (1 + 6 * n) ** (5 / 3)
     )
 
-    return Su
+    return round(Su,2)
