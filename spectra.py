@@ -1,4 +1,5 @@
 import numpy as np
+from scipy.signal import welch
 
 
 def kaimal_spectrum(frequency,
@@ -7,7 +8,7 @@ def kaimal_spectrum(frequency,
     length_scale
 ):
     """
-    Calculate longitudinal turbulence spectrum
+    Calculates longitudinal turbulence spectrum
     using a Kaimal-type formulation.
     """
 
@@ -20,3 +21,21 @@ def kaimal_spectrum(frequency,
     )
 
     return round(Su,2)
+
+
+def welch_spectrum(wind_speed, sampling_freq):
+    """
+    """
+
+    wind_speed = np.asarray(
+        wind_speed,
+        dtype=float
+    )
+
+    frequency, psd = welch(
+        wind_speed,
+        fs=sampling_freq,nperseg=8
+    )
+
+    return frequency, psd
+
