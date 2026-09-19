@@ -23,8 +23,9 @@ def kaimal_spectrum(frequency,
     return round(Su,2)
 
 
-def welch_spectrum(wind_speed, sampling_freq):
+def welch_psd(wind_speed, sampling_freq):
     """
+    Estimate PSD from measured wind data 
     """
 
     wind_speed = np.asarray(
@@ -38,4 +39,5 @@ def welch_spectrum(wind_speed, sampling_freq):
     )
 
     return frequency, psd
+
 
