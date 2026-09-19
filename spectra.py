@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 from scipy.signal import welch
 
 
@@ -39,5 +40,25 @@ def welch_psd(wind_speed, sampling_freq):
     )
 
     return frequency, psd
+
+
+def welch_spectrum(wind_speed, sampling_freq):
+    """
+    Plots the Welch Spectrum 
+    """
+    frequency, psd=welch_psd(wind_speed, sampling_freq)
+    plt.figure(figsize=(6, 8))
+
+    plt.plot(frequency,psd)
+    
+    plt.xlabel("Frequency")
+    plt.ylabel("PSD")
+    plt.title("Welch Spectrum")
+    
+    plt.xlim(0, 1)
+    plt.ylim(0, 10)
+    
+    plt.grid()
+    plt.show()
 
 
