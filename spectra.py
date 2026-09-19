@@ -23,6 +23,30 @@ def kaimal_spectrum(frequency,
 
     return round(Su,2)
 
+def von_karman_spectrum(
+    frequency,
+    mean_wind_speed,
+    std_dev,
+    length_scale
+):
+    frequency = np.asarray(frequency, dtype=float)
+
+    n = (
+        frequency
+        * length_scale
+        / mean_wind_speed
+    )
+
+    Su = (
+        4
+        * std_dev**2
+        * length_scale
+        / mean_wind_speed
+        / (1 + 70.8 * n**2)**(5/6)
+    )
+
+    return round(Su,2)
+
 
 def welch_psd(wind_speed, sampling_freq):
     """
