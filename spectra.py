@@ -40,7 +40,7 @@ def welch_psd(wind_speed, sampling_freq):
 
 def welch_spectrum(wind_speed, sampling_freq):
     """
-    Plots the Welch Spectrum 
+    Plots the Welch Spectrum for the measured wind data
     """
     frequency, psd=welch_psd(wind_speed, sampling_freq)
     plt.figure(figsize=(6, 8))
