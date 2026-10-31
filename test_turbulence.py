@@ -29,3 +29,7 @@ def test_integral_time_scale():
 def test_integral_length_scale():
     Lu=turbulence.integral_length_scale(15,0.74)
     assert Lu==11.1
+
+def test_cylinder_flow():
+    Re,fs=turbulence.cylinder_flow(1,0.05)
+    assert Re,fs==(3333.33, 4.0)
