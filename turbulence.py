@@ -113,3 +113,12 @@ def integral_length_scale(mean_wind_speed,time_scale):
     L_u = mean_wind_speed * time_scale
 
     return L_u
+
+def cylinder_flow(U:float,D:float,nu=1.5e-5,St=0.2):
+    """
+    Returns the Reynolds Number and the shedding frequency
+    """
+    Re = U * D / nu
+    shedding_frequency = St * U / D
+
+    return round (Re,2), round (shedding_frequency,2)
